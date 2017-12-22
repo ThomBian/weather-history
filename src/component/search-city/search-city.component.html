@@ -1,0 +1,16 @@
+<div>
+    <form (ngSubmit)="onSubmit()">
+        <input id="search-input"
+            [(ngModel)]="cityNameSearched"
+            name="name" 
+            type="text"
+            placeholder="City to look for">
+        <button type="submit" [disabled]="!cityNameSearched">Search</button>
+    </form>
+    <ul id="found-cities">
+        <li *ngFor="let city of foundedCities">
+            <span class="name">{{city.name}}</span>
+            <span class="dept">{{city.dept}}</span>
+        </li>
+    </ul>
+</div>
