@@ -11,9 +11,10 @@
         <button type="submit" [disabled]="!cityNameSearched">Search</button>
     </form>
     <ul *ngIf="foundedCities" id="found-cities">
-        <li *ngFor="let city of foundedCities" (click)="onSelectCity(city)">
+        <li *ngFor="let city of foundedCities" (click)="onSelect(city)">
             <span class="name">{{city.city}}</span>
             <span class="dept">{{city.state}}</span>
         </li>
     </ul>
+    <weather-history [city]="selectedCity"></weather-history>
 </div>

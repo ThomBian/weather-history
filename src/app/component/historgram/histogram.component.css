@@ -1,0 +1,11 @@
+.bar {
+    display: inline-block;
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+    width: 20px;
+    vertical-align: bottom;
+}

@@ -14,6 +14,7 @@ export class SearchCity {
   foundedCities: CityW[] = [];
   cityNameSearched: string;
   error: string;
+  selectedCity: CityW;
 
   constructor(private citiesService:CitiesService) {}
 
@@ -29,5 +30,6 @@ export class SearchCity {
   }
 
   onSelect(city:CityW) {
+    this.selectedCity = city;
   }
 }

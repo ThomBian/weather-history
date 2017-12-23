@@ -5,11 +5,15 @@ import { HttpModule }    from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SearchCity } from './component/search-city/search-city.component';
+import { WeatherHistory } from './component/weather-history/weather-history.component';
+import { Histogram } from './component/historgram/histogram.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchCity
+    SearchCity,
+    WeatherHistory,
+    Histogram
   ],
   imports: [
     BrowserModule,
