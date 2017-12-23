@@ -1,4 +1,7 @@
 <div>
+    <div *ngIf="error">
+        <span>{{error}}</span>
+    </div>
     <form (ngSubmit)="onSubmit()">
         <input id="search-input"
             [(ngModel)]="cityNameSearched"
@@ -7,10 +10,10 @@
             placeholder="City to look for">
         <button type="submit" [disabled]="!cityNameSearched">Search</button>
     </form>
-    <ul id="found-cities">
-        <li *ngFor="let city of foundedCities">
-            <span class="name">{{city.name}}</span>
-            <span class="dept">{{city.dept}}</span>
+    <ul *ngIf="foundedCities" id="found-cities">
+        <li *ngFor="let city of foundedCities" (click)="onSelectCity(city)">
+            <span class="name">{{city.city}}</span>
+            <span class="dept">{{city.state}}</span>
         </li>
     </ul>
 </div>
