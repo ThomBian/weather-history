@@ -48,7 +48,6 @@ export class CitiesService {
                 }
                 if (jsonResponse.response.results) {
                     cities = jsonResponse.response.results as CityW[];
-                    console.log(cities);
                 }
                 return cities;
             })

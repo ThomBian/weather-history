@@ -15,7 +15,6 @@ export class HistoryService {
         const formattedZMW = ZMW.charAt(0) === '/' ? ZMW : `/${ZMW}`;
         const formattedDate = `history_${date}`;
         const url = Config.forgeUrl(`/${formattedDate}${formattedZMW}.json`);
-        console.log(url);
         return this.http.get(url)
             .toPromise()
             .then(response => {
