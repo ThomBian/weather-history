@@ -1,25 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, ViewEncapsulation, Input } from '@angular/core';
 
 import *  as d3 from 'd3';
 
-const data:any = {
-    "8":11,
-    "10":14,
-    "12":16,
-    "14":18,
-    "16":20,
-    "18":16,
-    "20":12,
-    "22":8,
-}
-
-const test:number [] = [
-    3,4,5,7,8,12,34
-]
-
 const xScale = d3.scaleLinear();
 const yScale = d3.scaleLinear().range([0, 340]);
-
 
 @Component({
     selector: 'histogram',
@@ -27,7 +11,7 @@ const yScale = d3.scaleLinear().range([0, 340]);
     styleUrls: ['./histogram.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class Histogram implements OnInit{
+export class Histogram implements OnChanges {
 
     margin = {
         top: 20,
@@ -35,20 +19,19 @@ export class Histogram implements OnInit{
         right: 10,
         left: 10
     }
-    width:number = 600 - this.margin.left - this.margin.right;
-    height:number = 400 - this.margin.top - this.margin.bottom;
+    width:number = 1200 - this.margin.left - this.margin.right;
+    height:number = 800 - this.margin.top - this.margin.bottom;
     chart:any;
 
-    data:{} = data;
-    values: number[];
-    keys: any[];
-    
-    constructor() {
-        this.values = Object.values(this.data).map(Number);
-        this.keys = Object.keys(this.data);
-    }
+    @Input()
+    data:{} = {};
+
+    values: number[] = [];
+    keys: any[] = [];
     
     createHistrogram() {
+        this.values = Object.values(this.data).map(Number);
+        this.keys = Object.keys(this.data);
 
         let yScale = d3.scaleLinear()
             .domain([0, d3.max(this.values)])
@@ -79,12 +62,12 @@ export class Histogram implements OnInit{
         barContainer.append('rect')
             .attr('y', d => yScale(d))
             .attr('height', d => this.height - yScale(d))
-            .attr('width', xScale.bandwidth() - 2);
+            .attr('width', xScale.bandwidth());
         
-        barContainer.append('text')
-            .attr('x', xScale.bandwidth()/2 - 14)
-            .attr('y', d => this.height - 10)
-            .text(d => `${d} ˚C`);
+        // barContainer.append('text')
+        //     .attr('x', xScale.bandwidth()/2 - 14)
+        //     .attr('y', d => this.height - 10)
+        //     .text(d => `${d} ˚C`);
     }
 
     createAxis(xScale, yScale) {
@@ -102,7 +85,7 @@ export class Histogram implements OnInit{
             .text('Time of day')
     }
 
-    ngOnInit() {
+    ngOnChanges() {
         this.createHistrogram();     
     }
 }

@@ -1,4 +1,4 @@
 <div *ngIf="city" id="weather-history-container">
     <h1>{{city.city}} History</h1>
-    <histogram></histogram>
+    <histogram [data]="observations"></histogram>
 </div>

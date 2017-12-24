@@ -10,7 +10,7 @@ svg {
 
 .bar text {
     fill: #FFEB3B;
-    font-size: 24px;
+    font-size: 10px;
     font-weight: bold;
 }
 
@@ -21,7 +21,7 @@ svg {
 }
 
 .tick text {
-    font-size: 18px;
+    font-size: 10px;
     fill: #2196F3;
 }
 
