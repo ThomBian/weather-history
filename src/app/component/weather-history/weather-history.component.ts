@@ -22,7 +22,7 @@ export class WeatherHistory implements OnChanges {
         // call api to get history
         if (this.city) {
             const mockedDate = '20171223';
-            this.historyService.getHistory(mockedDate, this.city.zmw)
+            this.historyService.getHistory(mockedDate, this.city.l)
                 .then(results => {
                     this.observations = results;
                 });

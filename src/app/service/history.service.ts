@@ -9,12 +9,12 @@ import { Config } from '../config';
 export class HistoryService {
     constructor(private http:Http) {}
 
-    getHistory(date:string, zmw:string): Promise<{}> {
+    getHistory(date:string, ZMW:string): Promise<{}> {
         this.assertParamIsDefined(date);
-        this.assertParamIsDefined(zmw);
+        this.assertParamIsDefined(ZMW);
+        const formattedZMW = ZMW.charAt(0) === '/' ? ZMW : `/${ZMW}`;
         const formattedDate = `history_${date}`;
-        const formattedZmw = `zmw:${zmw}`;
-        const url = Config.forgeUrl(`/${formattedDate}/q/${formattedZmw}.json`);
+        const url = Config.forgeUrl(`/${formattedDate}${formattedZMW}.json`);
         console.log(url);
         return this.http.get(url)
             .toPromise()

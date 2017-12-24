@@ -17,10 +17,10 @@ export class Histogram implements OnChanges {
         top: 20,
         bottom: 90,
         right: 10,
-        left: 10
+        left: 50
     }
-    width:number = 1200 - this.margin.left - this.margin.right;
-    height:number = 800 - this.margin.top - this.margin.bottom;
+    width:number = 1400 - this.margin.left - this.margin.right;
+    height:number = 400 - this.margin.top - this.margin.bottom;
     chart:any;
 
     @Input()
@@ -33,13 +33,14 @@ export class Histogram implements OnChanges {
         this.values = Object.values(this.data).map(Number);
         this.keys = Object.keys(this.data);
 
+        const yDomain = Math.max(Math.abs(d3.min(this.values)), Math.abs(d3.max(this.values)));
         let yScale = d3.scaleLinear()
-            .domain([0, d3.max(this.values)])
+            .domain([-yDomain, yDomain])
             .range([this.height, 0]); // [height, 0] due to top left corner reference in svg
     
         let xScale = d3.scaleBand()
             .domain(this.keys)
-            .rangeRound([0, this.width]);
+            .range([0, this.width]);
 
         this.chart = d3.select('#root')
             .attr('width', this.width + this.margin.left + this.margin.right)
@@ -60,14 +61,14 @@ export class Histogram implements OnChanges {
                         .attr('transform', (d, i) => `translate(${i * xScale.bandwidth()}, 0)`);
         
         barContainer.append('rect')
-            .attr('y', d => yScale(d))
-            .attr('height', d => this.height - yScale(d))
-            .attr('width', xScale.bandwidth());
+            .attr('y', d => yScale(Math.max(0 ,d)))
+            .attr('height', d => Math.abs(yScale(d) - yScale(0)))
+            .attr('width', xScale.bandwidth() - 1);
         
-        // barContainer.append('text')
-        //     .attr('x', xScale.bandwidth()/2 - 14)
-        //     .attr('y', d => this.height - 10)
-        //     .text(d => `${d} ˚C`);
+        barContainer.append('text')
+            .attr('x', xScale.bandwidth()/2 - 8)
+            .attr('y', d => this.height - 10)
+            .text(d => `${d}˚`);
     }
 
     createAxis(xScale, yScale) {
@@ -82,7 +83,10 @@ export class Histogram implements OnChanges {
             .attr('class', 'legend')
             .attr('x', this.width / 2)
             .attr('y', 50)
-            .text('Time of day')
+            .text('Time of day');
+        this.chart.append('g')
+            .attr('class', 'y axis')
+            .call(axisY);
     }
 
     ngOnChanges() {

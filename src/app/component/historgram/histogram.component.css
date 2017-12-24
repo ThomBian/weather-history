@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
 svg {
-   font-family: 'Amatic SC', cursive;
+   font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .bar {
@@ -10,8 +10,16 @@ svg {
 
 .bar text {
     fill: #FFEB3B;
-    font-size: 10px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+.bar:hover {
+    fill: #FFEB3B
+}
+
+.bar:hover > text {
+    fill: #2196F3;
 }
 
 .legend {
@@ -21,7 +29,7 @@ svg {
 }
 
 .tick text {
-    font-size: 10px;
+    font-size: 12px;
     fill: #2196F3;
 }
 
@@ -36,5 +44,5 @@ svg {
 }
 
 .axis.x path {
-    display: none;
+    display: none
 }
