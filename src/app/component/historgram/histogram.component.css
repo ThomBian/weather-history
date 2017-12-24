@@ -1,11 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Open+Sans+Condensed:300');
+
+svg {
+   font-family: 'Amatic SC', cursive;
+}
+
 .bar {
-    display: inline-block;
-    font: 10px sans-serif;
-    background-color: steelblue;
-    text-align: right;
-    padding: 3px;
-    margin: 1px;
-    color: white;
-    width: 20px;
-    vertical-align: bottom;
+    fill: #2196F3;
+}
+
+.bar text {
+    fill: #FFEB3B;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.legend {
+    fill: #2196F3;
+    font-size: 15px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.tick text {
+    font-size: 18px;
+    fill: #2196F3;
+}
+
+.axis text {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #2196F3;
+}
+
+.axis.x path {
+    display: none;
 }

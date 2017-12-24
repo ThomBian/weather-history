@@ -30,6 +30,7 @@ export class SearchCity {
   }
 
   onSelect(city:CityW) {
+    this.foundedCities = [];
     this.selectedCity = city;
   }
 }
