@@ -5,21 +5,17 @@ svg {
 }
 
 .bar {
-    fill: #2196F3;
+    fill: rgba(33, 150, 243, 1);
 }
 
-.bar text {
-    fill: #FFEB3B;
-    font-size: 18px;
+#temp-info {
+    fill: #8BC34A;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .bar:hover {
-    fill: #FFEB3B
-}
-
-.bar:hover > text {
-    fill: #2196F3;
+    fill: #8BC34A;
 }
 
 .legend {

@@ -21,7 +21,7 @@ export class WeatherHistory implements OnChanges {
     ngOnChanges() {
         // call api to get history
         if (this.city) {
-            const mockedDate = '20171223';
+            const mockedDate = '20171209';
             this.historyService.getHistory(mockedDate, this.city.l)
                 .then(results => {
                     this.observations = results;

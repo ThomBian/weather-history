@@ -14,13 +14,13 @@ const yScale = d3.scaleLinear().range([0, 340]);
 export class Histogram implements OnChanges, OnInit {
 
     margin = {
-        top: 20,
+        top: 40,
         bottom: 90,
         right: 10,
-        left: 50
+        left: 15
     }
-    width:number = 1400 - this.margin.left - this.margin.right;
-    height:number = 500 - this.margin.top - this.margin.bottom;
+    width:number = 1000 - this.margin.left - this.margin.right;
+    height:number = 400 - this.margin.top - this.margin.bottom;
 
     @Input()
     data:{} = {};
@@ -34,16 +34,24 @@ export class Histogram implements OnChanges, OnInit {
 
         const yDomain = Math.max(Math.abs(d3.min(this.values)), Math.abs(d3.max(this.values)));
         const yScale = d3.scaleLinear()
-            .domain([-yDomain, yDomain])
-            .range([this.height, 0]); // [height, 0] due to top left corner reference in svg
+            .domain([-yDomain - 1 , yDomain + 1])
+            .range([this.height - this.margin.top, 0]); // [height, 0] due to top left corner reference in svg
     
         const xScale = d3.scaleBand()
             .domain(this.keys)
             .range([0, this.width]);
 
-        const axisX = d3.axisBottom(xScale);
+        const tickValues = this.keys.reduce((acc, curV, curI) => {
+            if (curI % 2 === 0){
+                acc.push(curV);
+            }
+            return acc;
+        }, []);
+        const axisX = d3.axisBottom(xScale).tickValues(this.keys.length > 24 ? tickValues : this.keys);
         const axisY = d3.axisLeft(yScale);
         
+        d3.select('#temp-info').text('');
+
         let chart = d3.select('#root')
 
         let barsContainer = chart.select('.offset-container');
@@ -57,17 +65,15 @@ export class Histogram implements OnChanges, OnInit {
         // to create
         let bar = bars.enter().append('g')
                     .attr('class', 'bar')
-                    .attr('transform', (d, i) => `translate(${i * xScale.bandwidth()}, 0)`);
+                    .attr('transform', (d, i) => `translate(${i * xScale.bandwidth()}, 0)`)
+                    .on('mouseover', d => {
+                        d3.select('#temp-info').text(`Temp: ${d} ˚C`);
+                    });
 
         bar.append('rect')
             .attr('y', d => yScale(Math.max(0 ,d)))
             .attr('height', d => Math.abs(yScale(d) - yScale(0)))
             .attr('width', xScale.bandwidth() - 1);
-
-        bar.append('text')
-            .attr('x', xScale.bandwidth()/2 - 8)
-            .attr('y', d => this.height - this.margin.bottom)
-            .text(d => `${d}˚`);
 
         // to update
         bars.attr('transform', (d, i) => `translate(${i * xScale.bandwidth()}, 0)`);
@@ -79,20 +85,9 @@ export class Histogram implements OnChanges, OnInit {
            .attr('height', d => Math.abs(yScale(d) - yScale(0)))
            .attr('width', xScale.bandwidth() - 1);
         
-        bars.select('text')
-           .attr('x', xScale.bandwidth()/2 - 8)
-           .attr('y', d => this.height - this.margin.bottom)
-           .text(d => `${d}˚`);
-        
-        chart.selectAll('g.x.axis').call(axisX);
-        chart.selectAll('g.y.axis')
-            .attr('transform', `translate(${this.margin.left}, 0)`)
+        barsContainer.selectAll('g.x.axis').call(axisX);
+        barsContainer.selectAll('g.y.axis')
             .call(axisY);
-    }
-
-
-    createAxis(xScale, yScale) {
-
     }
 
     ngOnChanges() {
@@ -105,20 +100,26 @@ export class Histogram implements OnChanges, OnInit {
         .attr('height', this.height + this.margin.top + this.margin.bottom)
         
         chart.append('g')
-            .attr('class', 'offset-container')
-            .attr('transform', `translate(${this.margin.left + 2}, 0)`)
+             .attr('class', 'offset-container')
+             .attr('transform', `translate(${this.margin.left + 2}, ${this.margin.top})`)
         
-        //let container = d3.select('#root .offset-container');
+        let container = d3.select('#root .offset-container');
         
-        chart.append('g')
+        container.append('g')
             .attr('class', 'y axis');
-        chart.append('g')
+
+        container.append('g')
             .attr('class', 'x axis')
-            .attr('transform', `translate(${this.margin.left}, ${this.height})`)
+            .attr('transform', `translate(0, ${this.height - this.margin.top})`)
             .append('text')
             .attr('class', 'legend')
             .attr('x', this.width / 2)
             .attr('y', 50)
             .text('Time of day');
+        
+        container.append('g')
+            .attr('transform', `translate(${this.margin.left - 5}, 0)`)
+            .append('text')
+            .attr('id', 'temp-info'); 
     }
 }
