@@ -1,0 +1,50 @@
+#search-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#search-container form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#search-input {
+    height: 35px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    border: none;
+    border-bottom: solid 2px #BDBDBD;
+}
+
+#search-input:focus {
+    outline: none;
+    border-bottom-color : #4CAF50;
+}
+
+#search-container button {
+    font-size: 20px;
+    width: 80px;
+}
+
+#founded-cities {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+}
+
+.city-founded {
+    margin: 5px;
+    font-size: 30px;
+    padding: 10px 20px;
+    -webkit-box-shadow: 0px 5px 5px 1px rgba(189,189,189,0.73);
+    -moz-box-shadow: 0px 5px 5px 1px rgba(189,189,189,0.73);
+    box-shadow: 0px 5px 5px 1px rgba(189,189,189,0.73);
+    cursor: pointer;
+}
+
+.city-founded:hover {
+    background-color: #4CAF50;
+    color: white;
+}

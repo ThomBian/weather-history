@@ -1,5 +1,5 @@
 <div id="weather-history-container" *ngIf="city">
     <date-picker (shareChosenDate)="receivedChosenDateEvent($event)" ></date-picker>
-    <h1>{{city.city}} History</h1>
+    <h1>{{city.city}}</h1>
     <histogram [chosenDate]="chosenDate" [data]="observations"></histogram>
 </div>

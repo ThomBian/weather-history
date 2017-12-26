@@ -1,14 +1,15 @@
-<div>
+<div id="search-container">
     <form (ngSubmit)="onSubmit()">
         <input id="search-input"
             [(ngModel)]="cityNameSearched"
             name="name" 
             type="text"
-            placeholder="City to look for">
+            placeholder="City to look for..."
+            autofocus>
         <button type="submit" [disabled]="!cityNameSearched">Search</button>
     </form>
-    <ul *ngIf="foundedCities" id="found-cities">
-        <li *ngFor="let city of foundedCities" (click)="onSelect(city)">
+    <ul *ngIf="foundedCities" id="founded-cities">
+        <li class="city-founded" *ngFor="let city of foundedCities" (click)="onSelect(city)">
             <span class="name">{{city.city}}</span>
             <span class="dept">{{city.state}}</span>
         </li>

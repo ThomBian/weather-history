@@ -1,6 +1,6 @@
-<div *ngIf="errors && errors.length > 0">
-    <ul class="errors">
-        <li *ngFor="let error of errors" class="error">{{error}}</li>
-    </ul>
-    <button (click)="remove()">Close</button>
-</div>
+<ul class="errors" *ngIf="errors && errors.length > 0">
+    <li *ngFor="let error of errors" class="error" (click)="removeError(error.id)">
+        <img [src]="ErrorLogo">
+        <span>{{error.message}}</span>
+    </li>
+</ul>

@@ -1,15 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'error',
     templateUrl: './error.component.html',
-    styleUrls: ['./error.component.css']
+    styleUrls: ['./error.component.css'],
+    encapsulation: ViewEncapsulation.None
+
 })
 export class ErrorComponent {
-    errors: string[] = [];
+    private ErrorLogo = require('./error.svg');
+    private id:number = -1;
+    errors: {
+        id:number,
+        message:string
+    }[] = [];
 
     addError(error:string) {
-        this.errors.push(error);
+        this.id = this.id + 1;
+        this.errors.push({
+            id: this.id,
+            message: error
+        });
+    }
+
+    removeError(id: number) {
+        this.errors = this.errors.filter(error => error.id !== id);
     }
 
     remove() {

@@ -1,4 +1,4 @@
-import { Component, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 import { CityW } from '../../data-model/city-wunderground';
 import { CitiesService } from '../../service/cities.service';
@@ -7,7 +7,8 @@ import { CitiesService } from '../../service/cities.service';
   selector: 'search-city',
   templateUrl: './search-city.component.html',
   styleUrls: ['./search-city.component.css'],
-  providers: [CitiesService]
+  providers: [CitiesService],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SearchCity {

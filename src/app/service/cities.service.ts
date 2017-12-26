@@ -40,7 +40,7 @@ export class CitiesService {
             .toPromise()
             .then(response => {
                 const jsonResponse = response.json();
-                this.assertAPIIsOk(jsonResponse.response);
+                this.assertAPIIsOk(jsonResponse.response, name);
                 let cities: CityW[] = [];
                 if (jsonResponse.location) {
                     const cityFounded: CityW = jsonResponse.location as CityW;
@@ -54,10 +54,10 @@ export class CitiesService {
             .catch(this.handleError);
     }
 
-    private assertAPIIsOk(response: any) {
+    private assertAPIIsOk(response: any, city:string) {
         if(response.error) {
             const e = new Error();
-            e.message = response.error.description;
+            e.message = `${response.error.description} (${city})`;
             throw (e);
         }
     }

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 import { CityW } from '../../data-model/city-wunderground';
 import { HistoryService } from '../../service/history.service';
@@ -7,7 +7,8 @@ import { HistoryService } from '../../service/history.service';
     selector: 'weather-history',
     templateUrl: './weather-history.component.html',
     styleUrls: ['./weather-history.component.css'],
-    providers: [HistoryService]
+    providers: [HistoryService],
+    encapsulation: ViewEncapsulation.None
 })
 export class WeatherHistory {
 
