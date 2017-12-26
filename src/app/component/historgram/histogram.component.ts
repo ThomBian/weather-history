@@ -45,18 +45,19 @@ export class Histogram implements OnChanges, OnInit {
             .domain(this.keys)
             .range([0, this.width]);
 
-        // display only 1 on 2 hours
+        // filter ticks : 1 on 2 hours
         const tickValues = this.keys.reduce((acc, curV, curI) => {
             if (curI % 2 === 0){
                 acc.push(curV);
             }
             return acc;
         }, []);
+
         // apply tick filter if necessary
         const axisX = d3.axisBottom(xScale).tickValues(this.keys.length > 24 ? tickValues : this.keys);
         const axisY = d3.axisLeft(yScale);
 
-        // line data
+        // y(0) line 
         const lineData = [{x: xScale(this.keys[0]), y: yScale(0)},
                           {x: xScale(this.keys[this.keys.length - 1]) + + xScale.bandwidth(), y: yScale(0)}];
         
@@ -69,13 +70,11 @@ export class Histogram implements OnChanges, OnInit {
             .attr("stroke-width", 1)
             .attr("stroke", "#2196F3");;
         
-        // histogram building
         d3.select('#temp-info').text('');
 
+        // histogram building
         let chart = d3.select('#root');
-
         let barsContainer = chart.select('.offset-container');
-
         let bars = barsContainer.selectAll('.bar')
             .data(this.values);
 

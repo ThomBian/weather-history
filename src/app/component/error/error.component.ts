@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+import { ErrorInternal } from '../../data-model/error-internal';
+
 @Component({
     selector: 'error',
     templateUrl: './error.component.html',
@@ -10,10 +12,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class ErrorComponent {
     private ErrorLogo = require('./error.svg');
     private id:number = -1;
-    errors: {
-        id:number,
-        message:string
-    }[] = [];
+    errors: ErrorInternal[] = [];
 
     addError(error:string) {
         this.id = this.id + 1;
