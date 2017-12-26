@@ -23,8 +23,9 @@ export class WeatherHistory {
 
     receivedChosenDateEvent(chosen:string){
         const data = chosen.split('/'); //[mm, dd, yyyy]
-        const formatedDate = this.formatDate(+data[1], +data[0], +data[2]);
+        const formatedDate = this.formatDate(+data[2], +data[1], +data[0]);
         const yesterday = this.getYesterday();
+        console.log('comare:', formatedDate, yesterday, formatedDate > yesterday);
         if (formatedDate > yesterday) {
             this.throwError.emit(`The chosen date (${chosen}) has to be in the past`);
         } else {
