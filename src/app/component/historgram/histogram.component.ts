@@ -23,6 +23,9 @@ export class Histogram implements OnChanges, OnInit {
     height:number = 400 - this.margin.top - this.margin.bottom;
 
     @Input()
+    chosenDate:string;
+
+    @Input()
     data:{} = {};
 
     values: number[] = [];
@@ -52,7 +55,7 @@ export class Histogram implements OnChanges, OnInit {
         
         d3.select('#temp-info').text('');
 
-        let chart = d3.select('#root')
+        let chart = d3.select('#root');
 
         let barsContainer = chart.select('.offset-container');
 
@@ -88,6 +91,11 @@ export class Histogram implements OnChanges, OnInit {
         barsContainer.selectAll('g.x.axis').call(axisX);
         barsContainer.selectAll('g.y.axis')
             .call(axisY);
+
+        chart.select('#dateInfo')
+             .transition()
+             .duration(700)
+             .text(this.chosenDate);
     }
 
     ngOnChanges() {
@@ -120,6 +128,12 @@ export class Histogram implements OnChanges, OnInit {
         container.append('g')
             .attr('transform', `translate(${this.margin.left - 5}, 0)`)
             .append('text')
-            .attr('id', 'temp-info'); 
+            .attr('id', 'temp-info');
+        
+        container.append('g')
+            .append('text')
+            .attr('id', 'dateInfo')
+            .attr('transform', `translate(${this.width / 2}, 0)`)
+            .text('Yesterday');
     }
 }

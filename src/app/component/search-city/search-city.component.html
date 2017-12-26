@@ -1,7 +1,4 @@
 <div>
-    <div *ngIf="error">
-        <span>{{error}}</span>
-    </div>
     <form (ngSubmit)="onSubmit()">
         <input id="search-input"
             [(ngModel)]="cityNameSearched"
@@ -16,5 +13,4 @@
             <span class="dept">{{city.state}}</span>
         </li>
     </ul>
-    <weather-history [city]="selectedCity"></weather-history>
 </div>

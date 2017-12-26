@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
 
 import { CityW } from '../../data-model/city-wunderground';
 import { CitiesService } from '../../service/cities.service';
@@ -11,26 +11,30 @@ import { CitiesService } from '../../service/cities.service';
 })
 
 export class SearchCity {
+
+  @Output()
+  throwError = new EventEmitter();
+  
+  @Output()
+  selectedCityEvent = new EventEmitter();
+
   foundedCities: CityW[] = [];
   cityNameSearched: string;
-  error: string;
-  selectedCity: CityW;
 
   constructor(private citiesService:CitiesService) {}
 
   onSubmit():void {
-    this.error = null;
     if(this.cityNameSearched){
       this.citiesService.getCitiesFromApi(this.cityNameSearched)
         .then(foundedCities => {
           this.foundedCities = foundedCities;
         })
-        .catch(e => this.error = e);
+        .catch(e => this.throwError.emit(e));
     }
   }
 
   onSelect(city:CityW) {
     this.foundedCities = [];
-    this.selectedCity = city;
+    this.selectedCityEvent.emit(city);
   }
 }
