@@ -10,7 +10,6 @@ import { ErrorInternal } from '../../data-model/error-internal';
 
 })
 export class ErrorComponent {
-    private ErrorLogo = require('./error.svg');
     private id:number = -1;
     errors: ErrorInternal[] = [];
 

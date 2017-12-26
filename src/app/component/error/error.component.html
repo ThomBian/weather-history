@@ -1,6 +1,6 @@
 <ul class="errors" *ngIf="errors && errors.length > 0">
     <li *ngFor="let error of errors" class="error" (click)="removeError(error.id)">
-        <img [src]="ErrorLogo">
+        <img src="assets/error.svg">
         <span>{{error.message}}</span>
     </li>
 </ul>
