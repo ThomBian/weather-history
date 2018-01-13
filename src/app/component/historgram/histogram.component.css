@@ -1,46 +1,50 @@
 svg {
-   font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .bar {
-    fill: rgba(33, 150, 243, 1);
+  fill: #FF4081;
 }
 
 #temp-info {
-    fill: #8BC34A;
-    font-weight: bold;
-    font-size: 20px;
+  fill: #C5CAE9;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 #dateInfo {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .bar:hover {
-    fill: #8BC34A;
+  fill: #C5CAE9;
 }
 
 .legend {
-    fill: #2196F3;
-    font-size: 15px;
-    font-family: 'Open Sans Condensed', sans-serif;
+  fill: #C5CAE9;
+  font-size: 15px;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .tick text {
-    font-size: 12px;
-    fill: #2196F3;
+  font-size: 12px;
+  fill: #C5CAE9;
 }
 
 .axis text {
-    font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .axis path,
 .axis line {
-    fill: none;
-    stroke: #2196F3;
+  fill: none;
+  stroke: #FF4081;
 }
 
 .axis.x path {
-    display: none;
+  display: none;
+}
+
+#dateInfo {
+  fill: #C5CAE9;
 }

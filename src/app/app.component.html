@@ -1,6 +1,6 @@
 <div id="main">
-  <error #errors></error>
   <h1>{{title}}</h1>
   <search-city (throwError)="errors.addError($event)" (selectedCityEvent)="whistory.setCity($event)"></search-city>
+  <error #errors></error>
   <weather-history #whistory (throwError)="errors.addError($event)"></weather-history>
 </div>

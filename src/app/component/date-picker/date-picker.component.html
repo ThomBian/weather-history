@@ -1,4 +1,3 @@
 <div id="date-picker-container">
-    <label for="date-picker">Pick a date : </label>
-    <p-calendar id="date-picker" [(ngModel)]="chosenDate" (ngModelChange)="onDateChanged($event)"></p-calendar>
+  <p-calendar id="date-picker" [(ngModel)]="chosenDate" (ngModelChange)="onDateChanged($event)" readonlyInput="true" [inline]="true"></p-calendar>
 </div>
